@@ -164,10 +164,31 @@
   .verse .en-verse{font-size:20px;margin-top:28px;opacity:.85}
   .hosts{background:var(--ivory)}
   .hosts .lead-ar{font-size:32px;color:var(--navy);font-weight:700;margin-bottom:6px}
-  .host-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin:6px 0}
+  .families{display:grid;grid-template-columns:1fr 1px 1fr;gap:0 14px;direction:ltr;margin:8px -8px 4px;align-items:start}
+  .fam-sep{background:linear-gradient(180deg,transparent,var(--gold) 15%,var(--gold) 85%,transparent);align-self:stretch}
+  .fam-head{margin-bottom:14px}
+  .fam-name{font-size:40px;color:var(--gold-2);line-height:1.1}
+  .fam-name-ar{font-family:'Aref Ruqaa','Amiri',serif;font-size:24px;color:var(--navy);line-height:1.2}
+  .fam-role{display:flex;flex-direction:column;align-items:center;margin-top:6px;padding-top:6px;border-top:1px solid rgba(184,145,74,.4)}
+  .fam-role .caps{font-size:9px;letter-spacing:.18em;color:var(--gold-2)}
+  .fam-role .ar{font-size:15px;color:var(--gold-2)}
+  .host-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin:0}
   .host-list li{display:flex;flex-direction:column;align-items:center}
-  .host-list .ar{font-size:22px;color:var(--navy);font-weight:700;line-height:1.4}
-  .host-list .en{font-size:15px;color:var(--muted);font-style:italic}
+  .host-list .t{font-size:14px;color:var(--gold-2);line-height:1.2}
+  .host-list .ar{font-size:18px;color:var(--navy);font-weight:700;line-height:1.35}
+  .host-list .en{font-size:13px;color:var(--muted);font-style:italic;line-height:1.25}
+  /* play / pause */
+  #autoplay{position:fixed;right:16px;bottom:18px;z-index:40;width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);
+    background:rgba(15,28,51,.88);color:var(--gold-3);display:none;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);-webkit-tap-highlight-color:transparent;backdrop-filter:blur(4px)}
+  #autoplay.show{display:flex}
+  #autoplay svg{width:20px;height:20px}
+  #autoplay .i-play{display:none}
+  #autoplay.paused .i-play{display:block}
+  #autoplay.paused .i-pause{display:none}
+  #autoplay .ring{position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(212,175,106,.45);animation:ring 2s ease-out infinite}
+  #autoplay.paused .ring{display:none}
+  @keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.25);opacity:0}}
   .hosts .invite-ar{font-size:22px;color:var(--navy);line-height:1.7;margin:10px 0 8px}
   .hosts .lead{font-size:18px;color:var(--muted)}
   .couple{background:var(--cream)}
@@ -249,13 +270,34 @@
       <div class="lead-ar" dir="rtl">يتشرف كلاً من</div>
       <div class="label caps">Cordially invite you</div>
       <div class="divider"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M7 0l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></div>
-      <ul class="host-list">
-        <li><span class="ar" dir="rtl">المعلم / نادي فوزي ميخائيل</span><span class="en">Mr. Nady Fawzy Mikhail</span></li>
-        <li><span class="ar" dir="rtl">و الأستاذ / أشرف نادي فوزي</span><span class="en">Mr. Ashraf Nady Fawzy</span></li>
-        <li><span class="ar" dir="rtl">و الدكتور / يحيى نادي فوزي</span><span class="en">Dr. Yehia Nady Fawzy</span></li>
-        <li><span class="ar" dir="rtl">الدكتور / مجدي فليمون جيد</span><span class="en">Dr. Magdy Philemon Gayed</span></li>
-        <li><span class="ar" dir="rtl">و الأستاذ / رامي جوزيف فليمون</span><span class="en">Mr. Ramy Joseph Philemon</span></li>
-      </ul>
+      <div class="families">
+        <!-- left: the bride's family -->
+        <div class="fam">
+          <div class="fam-head">
+            <div class="fam-name script">Rania</div>
+            <div class="fam-name-ar" dir="rtl">رانيا</div>
+            <div class="fam-role"><span class="caps">The Bride's Family</span><span class="ar" dir="rtl">أهل العروس</span></div>
+          </div>
+          <ul class="host-list">
+            <li><span class="t" dir="rtl">المعلم /</span><span class="ar" dir="rtl">نادي فوزي ميخائيل</span><span class="en">Mr. Nady Fawzy Mikhail</span></li>
+            <li><span class="t" dir="rtl">و الأستاذ /</span><span class="ar" dir="rtl">أشرف نادي فوزي</span><span class="en">Mr. Ashraf Nady Fawzy</span></li>
+            <li><span class="t" dir="rtl">و الدكتور /</span><span class="ar" dir="rtl">يحيى نادي فوزي</span><span class="en">Dr. Yehia Nady Fawzy</span></li>
+          </ul>
+        </div>
+        <div class="fam-sep" aria-hidden="true"></div>
+        <!-- right: the groom's family -->
+        <div class="fam">
+          <div class="fam-head">
+            <div class="fam-name script">Philemon</div>
+            <div class="fam-name-ar" dir="rtl">فليمون</div>
+            <div class="fam-role"><span class="caps">The Groom's Family</span><span class="ar" dir="rtl">أهل العريس</span></div>
+          </div>
+          <ul class="host-list">
+            <li><span class="t" dir="rtl">الدكتور /</span><span class="ar" dir="rtl">مجدي فليمون جيد</span><span class="en">Dr. Magdy Philemon Gayed</span></li>
+            <li><span class="t" dir="rtl">و الأستاذ /</span><span class="ar" dir="rtl">رامي جوزيف فليمون</span><span class="en">Mr. Ramy Joseph Philemon</span></li>
+          </ul>
+        </div>
+      </div>
       <div class="divider"><svg viewBox="0 0 14 14" fill="currentColor"><path d="M7 0l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg></div>
       <p class="invite-ar" dir="rtl">بدعوة سيادتكم لحضور صلاة الإكليل المقدس وحفل الاستقبال للعروسين</p>
       <p class="lead">request the honour of your presence<br>at their Holy Matrimony and Wedding Reception</p>
@@ -362,12 +404,18 @@
   </section>
 </main>
 
+<button id="autoplay" type="button" aria-label="Pause">
+  <span class="ring"></span>
+  <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+  <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+</button>
+
 <script>
   // ---- open envelope ----
   const env = document.getElementById('envelope');
   function openEnv(){ if(env.classList.contains('open')) return; env.classList.add('open');
     setTimeout(()=>document.body.classList.remove('locked'), 1200); }
-  env.addEventListener('click', openEnv);
+  env.addEventListener('click', ()=>{ openEnv(); setTimeout(()=>auto.play(), 2600); });
   env.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') openEnv(); });
 
   // ---- reveal on scroll ----
@@ -403,6 +451,45 @@
     + '&dates=20270109T150000Z/20270109T210000Z'
     + '&location=' + encodeURIComponent('St. Mark Cathedral, Bani Mazar')
     + '&details=' + encodeURIComponent('Holy Matrimony 5:00 PM: St. Mark Cathedral, Bani Mazar https://maps.app.goo.gl/254bYRrLy9cFdcYB8\nReception 8:00 PM: Lusail Halls, New Minya https://maps.app.goo.gl/f7h4qvgW8Kwh9rNB8');
+
+  // ---- auto-scroll slideshow with play / pause ----
+  const auto = (()=>{
+    const btn = document.getElementById('autoplay');
+    const se = document.scrollingElement || document.documentElement;
+    const SPEED = 55;      // px per second
+    const HOLD = 1600;     // ms pause at the top of each section
+    let playing = false, last = 0, pos = 0, holdUntil = 0, raf = 0;
+    const stops = () => [...document.querySelectorAll('main > section')].map(s => s.offsetTop).filter(t => t > 0);
+    const maxScroll = () => se.scrollHeight - innerHeight;
+    function frame(t){
+      if(!playing) return;
+      if(t < holdUntil){ last = t; raf = requestAnimationFrame(frame); return; }
+      const dt = last ? Math.min(t - last, 100) : 16; last = t;
+      const before = pos;
+      pos = Math.min(maxScroll(), pos + SPEED * dt / 1000);
+      const hit = stops().find(s => before < s && pos >= s);
+      if(hit !== undefined){ pos = hit; holdUntil = t + HOLD; }
+      se.scrollTop = pos;
+      if(pos >= maxScroll() - 1){ pause(); return; }
+      raf = requestAnimationFrame(frame);
+    }
+    function play(){
+      if(playing) return;
+      if(se.scrollTop >= maxScroll() - 2) se.scrollTop = 0;   // replay from the start
+      pos = se.scrollTop; last = 0; holdUntil = 0; playing = true;
+      btn.classList.add('show'); btn.classList.remove('paused'); btn.setAttribute('aria-label','Pause');
+      raf = requestAnimationFrame(frame);
+    }
+    function pause(){
+      playing = false; cancelAnimationFrame(raf);
+      btn.classList.add('paused'); btn.setAttribute('aria-label','Play');
+    }
+    btn.addEventListener('click', e => { e.stopPropagation(); playing ? pause() : play(); });
+    // the guest takes over scrolling -> pause
+    ['wheel','touchstart'].forEach(ev => addEventListener(ev, e => { if(playing && !btn.contains(e.target)) pause(); }, {passive:true}));
+    addEventListener('keydown', e => { if(playing && ['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key)) pause(); });
+    return {play, pause};
+  })();
 </script>
 </body>
 </html>
